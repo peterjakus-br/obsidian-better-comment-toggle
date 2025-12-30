@@ -75,7 +75,12 @@ export class SettingsTab extends PluginSettingTab {
 							});
 					});
 			},
-			{ refreshAppearance: false },
+			{
+				refreshAppearance: false,
+				onApply: () => {
+					this.plugin.refreshCommentSettings();
+				},
+			},
 		);
 
 		if (this.plugin.settings.commentStyle === 'custom') {
@@ -115,7 +120,12 @@ export class SettingsTab extends PluginSettingTab {
 								}),
 						);
 				},
-				{ refreshAppearance: false },
+				{
+					refreshAppearance: false,
+					onApply: () => {
+						this.plugin.refreshCommentSettings();
+					},
+				},
 			);
 		}
 
