@@ -72,6 +72,25 @@ export default class BetterMarkdownCommentsPlugin extends Plugin {
 		CommentViewPlugin.updateEnabled(editorView, this.settings.overrideAppearance);
 	}
 
+	/**
+	 * Refresh the comment settings (style and custom tokens).
+	 *
+	 * This should be called when the comment style or custom comment tokens change.
+	 */
+	public refreshCommentSettings() {
+		const editorView = this.activeEditorView;
+		if (!editorView) {
+			return;
+		}
+
+		CommentViewPlugin.updateCommentSettings(
+			editorView,
+			this.settings.commentStyle,
+			this.settings.customCommentStart,
+			this.settings.customCommentEnd,
+		);
+	}
+
 	private get activeEditorView(): EditorView | undefined {
 		const editor = this.app.workspace.activeEditor?.editor;
 		return editor ? extractEditorView(editor) : undefined;
